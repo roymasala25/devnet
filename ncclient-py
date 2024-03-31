@@ -1,0 +1,25 @@
+from ncclient import manager
+import xml.dom.minidom
+m = manager.connect(
+    host="192.168.45.131",
+    port=830,
+    username="admin",
+    password="admin123",
+hostkey_verify=False
+)
+netconf_filter = """
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+        <hostname>NEWHOSTNAME</hostname>
+    </native> 
+</config>
+"""
+netconf_hostname = """
+<config>
+   <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+       <hostname>NEWHOSTNAME</hostname>
+   </native>
+</config>
+"""
+netconf_reply = m.edit_config(target="running", config=netconf_filter)
+print(xml.dom.minidom.parseString(netconf_reply.xml).toprettyxml())
