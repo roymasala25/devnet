@@ -1,0 +1,72 @@
+def display_question(question_number, question, options):
+    print(f"{question_number}. {question}")
+    for i, option in enumerate(options, start=1):
+        print(f"   {i}. {option}")
+    user_answer = input("your answer (enter the number of your choice): " )
+    return int(user_answer)
+
+def run_quiz():
+    questions = [
+        {
+            "question" : "how many layers in the osi model ? ",
+            "options": ["1", "2", "7", "5" ], 
+            "correct_answer": 3
+        },
+        {
+            "question": "what is the capital of isreal ? ", 
+            "options": ["new yourk", "jeruselm", "tokyo", "tel aviv"],
+            "correct_answer": 2
+        },
+        {
+            "question" : "what ip verison is in most uesd ? ",
+            "options": ["ipv4", "ipv5", "anycast", "ipv6"],
+            "correct_answer": 1
+        },
+        {
+            "question": "in what year was the state if isreal established ? ",
+            "options": ["1948", "1998", "1955", "1978"],
+            "correct_answer": 1
+        },
+        {
+            "question": "what is the currency of isreal ",
+            "options": ["shekel", "dollar", "yen", "euro"],
+            "correct_answer": 1
+        },
+        {
+            "question": "what is the capital of japan ?",
+            "options": ["tokyo", "tel aviv", "new yourk", ],
+            "correct_answer": 1
+        },
+        {
+            "question": "who is the president of the united states ? ",
+            "options": ["donald trump", "joe biden", "benjamin netanyahu", "charis brown"],
+            "correct_answer": 2
+        },
+        {
+            "question": "what is the currency of japan ?",
+            "options": ["yen", "dollar", "bitcoin", "shekel"],
+            "correct_answer": 1
+        },
+    ]
+     
+    score = 0
+    total_questions = len(questions)
+
+    for i, q in enumerate(questions, start=1):
+        user_choice = display_question(i, q["question"], q["options"])
+        if user_choice == q["correct_answer"]:
+            print("correct!\n")
+            score += 1
+        else:
+            correct_option = int(q['correct_answer'])
+            print(f"worng answer! the correct answer was {correct_option}: {q['options'][correct_option - 1]}\n")
+                  
+    percentage_score = (score / total_questions) * 100
+    print(f"you scored {score} out of {total_questions} questions ({percentage_score:.2f}%).")
+     
+    if percentage_score < 50:
+        print("unfortunatley, you failed. better luck next time.")
+    elif percentage_score > 90 :
+        print("congratulations! you did an excellebt job.")
+if  __name__ == "__main__":
+    run_quiz()
